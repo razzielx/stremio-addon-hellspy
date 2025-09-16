@@ -32,10 +32,35 @@ function buildSearchQuery(title, season, episode) {
 
 async function searchHellspy(query) {
   await delay(1000); // Rate limit: 1 second between calls
-  const url = `https://api.hellspy.to/gw/search?query=${query}&offset=0&limit=2`;
-  const response = await fetch(url);
-  const data = await response.json();
-  return data.items || [];
+  try {
+    const url = `https://api.hellspy.to/gw/search?query=${query}&offset=0&limit=2`;
+    console.log("Searching hellspy with query: " + query);
+    console.log("Search URL: " + url);
+
+    const response = await fetch(url);
+
+    console.log("Hellspy search response status: " + response.status + " " + response.statusText);
+    console.log("Hellspy search response headers:", Object.fromEntries(response.headers.entries()));
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Hellspy search failed with status " + response.status + ":", errorText);
+      throw new Error("Hellspy search failed: " + response.status + " " + response.statusText + " - " + errorText);
+    }
+
+    const data = await response.json();
+    console.log("Hellspy search response data:", JSON.stringify(data, null, 2));
+
+    return data.items || [];
+  } catch (error) {
+    console.error(`Error in searchHellspy for query '${query}':`, error);
+    console.error("Full error details:", {
+      message: error.message,
+      stack: error.stack,
+      name: error.name,
+    });
+    throw error; // Re-throw to let caller handle it
+  }
 }
 
 async function getVideoDetails(id, fileHash) {
