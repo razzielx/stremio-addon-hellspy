@@ -163,71 +163,71 @@ button:active {
 .full-width {
 	width: 100%;
 }
-`
+`;
 
 function landingTemplate(manifest) {
-	const background = manifest.background || 'https://dl.strem.io/addon-background.jpg'
-	const logo = manifest.logo || 'https://dl.strem.io/addon-logo.png'
-	const contactHTML = manifest.contactEmail ?
-		`<div class="contact">
+  const background = manifest.background || "https://dl.strem.io/addon-background.jpg";
+  const logo = manifest.logo || "https://dl.strem.io/addon-logo.png";
+  const contactHTML = manifest.contactEmail
+    ? `<div class="contact">
 			<p>Contact ${manifest.name} creator:</p>
 			<a href="mailto:${manifest.contactEmail}">${manifest.contactEmail}</a>
-		</div>` : ''
+		</div>`
+    : "";
 
-	const stylizedTypes = manifest.types
-		.map(t => t[0].toUpperCase() + t.slice(1) + (t !== 'series' ? 's' : ''))
+  const stylizedTypes = manifest.types.map((t) => t[0].toUpperCase() + t.slice(1) + (t !== "series" ? "s" : ""));
 
-	let formHTML = ''
-	let script = ''
+  let formHTML = "";
+  let script = "";
 
-	if ((manifest.config || []).length) {
-		let options = ''
-		manifest.config.forEach(elem => {
-			const key = elem.key
-			if (['text', 'number', 'password'].includes(elem.type)) {
-				const isRequired = elem.required ? ' required' : ''
-				const defaultHTML = elem.default ? ` value="${elem.default}"` : ''
-				const inputType = elem.type
-				options += `
+  if ((manifest.config || []).length) {
+    let options = "";
+    manifest.config.forEach((elem) => {
+      const key = elem.key;
+      if (["text", "number", "password"].includes(elem.type)) {
+        const isRequired = elem.required ? " required" : "";
+        const defaultHTML = elem.default ? ` value="${elem.default}"` : "";
+        const inputType = elem.type;
+        options += `
 				<div class="form-element">
 					<div class="label-to-top">${elem.title}</div>
 					<input type="${inputType}" id="${key}" name="${key}" class="full-width"${defaultHTML}${isRequired}/>
 				</div>
-				`
-			} else if (elem.type === 'checkbox') {
-				const isChecked = elem.default === 'checked' ? ' checked' : ''
-				options += `
+				`;
+      } else if (elem.type === "checkbox") {
+        const isChecked = elem.default === "checked" ? " checked" : "";
+        options += `
 				<div class="form-element">
 					<label for="${key}">
 						<input type="checkbox" id="${key}" name="${key}"${isChecked}> <span class="label-to-right">${elem.title}</span>
 					</label>
 				</div>
-				`
-			} else if (elem.type === 'select') {
-				const defaultValue = elem.default || (elem.options || [])[0]
-				options += `<div class="form-element">
+				`;
+      } else if (elem.type === "select") {
+        const defaultValue = elem.default || (elem.options || [])[0];
+        options += `<div class="form-element">
 				<div class="label-to-top">${elem.title}</div>
 				<select id="${key}" name="${key}" class="full-width">
-				`
-				const selections = elem.options || []
-				selections.forEach(el => {
-					const isSelected = el === defaultValue ? ' selected' : ''
-					options += `<option value="${el}"${isSelected}>${el}</option>`
-				})
-				options += `</select>
+				`;
+        const selections = elem.options || [];
+        selections.forEach((el) => {
+          const isSelected = el === defaultValue ? " selected" : "";
+          options += `<option value="${el}"${isSelected}>${el}</option>`;
+        });
+        options += `</select>
                </div>
-               `
-			}
-		})
-		if (options.length) {
-			formHTML = `
+               `;
+      }
+    });
+    if (options.length) {
+      formHTML = `
 			<form class="pure-form" id="mainForm">
 				${options}
 			</form>
 
 			<div class="separator"></div>
-			`
-			script += `
+			`;
+      script += `
 			installLink.onclick = () => {
 				return mainForm.reportValidity()
 			}
@@ -236,11 +236,11 @@ function landingTemplate(manifest) {
 				installLink.href = 'stremio://' + window.location.host + '/' + encodeURIComponent(JSON.stringify(config)) + '/manifest.json'
 			}
 			mainForm.onchange = updateLink
-			`
-		}
-	}
+			`;
+    }
+  }
 
-	return `
+  return `
 	<!DOCTYPE html>
 	<html style="background-image: url(${background});">
 
@@ -259,14 +259,14 @@ function landingTemplate(manifest) {
 			<img src="${logo}">
 			</div>
 			<h1 class="name">${manifest.name}</h1>
-			<h2 class="version">v${manifest.version || '0.0.0'}</h2>
-			<h2 class="description">${manifest.description || ''}</h2>
+			<h2 class="version">v${manifest.version || "0.0.0"}</h2>
+			<h2 class="description">${manifest.description || ""}</h2>
 
 			<div class="separator"></div>
 
 			<h3 class="gives">This addon has more :</h3>
 			<ul>
-			${stylizedTypes.map(t => `<li>${t}</li>`).join('')}
+			${stylizedTypes.map((t) => `<li>${t}</li>`).join("")}
 			</ul>
 
 			<div class="separator"></div>
@@ -288,7 +288,7 @@ function landingTemplate(manifest) {
 		</script>
 	</body>
 
-	</html>`
+	</html>`;
 }
 
-module.exports = landingTemplate
+module.exports = landingTemplate;

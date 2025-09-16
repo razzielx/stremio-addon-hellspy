@@ -4,6 +4,7 @@
   "description": "An SDK for making and publishing Stremio add-ons",
   "main": "./src/index.js",
   "scripts": {
+    "start": "node src/addon.js",
     "pretest": "eslint --ignore-path .gitignore .",
     "test": "tape test/*"
   },
@@ -29,8 +30,10 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "cors": "^2.8.4",
+    "dotenv": "^16.0.0",
     "express": "^4.16.3",
     "inquirer": "^6.2.2",
+    "localtunnel": "^2.0.2",
     "mkdirp": "^0.5.1",
     "node-fetch": "^2.3.0",
     "opn": "^5.4.0",
