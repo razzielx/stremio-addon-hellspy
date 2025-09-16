@@ -37,7 +37,25 @@ async function searchHellspy(query) {
     console.log("Searching hellspy with query: " + query);
     console.log("Search URL: " + url);
 
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        accept: "*/*",
+        "accept-language": "en-GB,en;q=0.9,cs-CZ;q=0.8,cs;q=0.7,en-US;q=0.6",
+        "cache-control": "no-cache",
+        origin: "https://www.hellspy.to",
+        pragma: "no-cache",
+        priority: "u=1, i",
+        referer: "https://www.hellspy.to/",
+        "sec-ch-ua": '"Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": '"Windows"',
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36",
+      },
+    });
 
     console.log("Hellspy search response status: " + response.status + " " + response.statusText);
     console.log("Hellspy search response headers:", Object.fromEntries(response.headers.entries()));

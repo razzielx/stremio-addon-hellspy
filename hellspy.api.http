@@ -1,0 +1,20 @@
+curl 'https://api.hellspy.to/gw/video/18506365/1a6b35c6847211a8' \
+  -H 'accept: */*' \
+  -H 'accept-language: en-GB,en;q=0.9,cs-CZ;q=0.8,cs;q=0.7,en-US;q=0.6' \
+  -H 'cache-control: no-cache' \
+  -H 'origin: https://www.hellspy.to' \
+  -H 'pragma: no-cache' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://www.hellspy.to/' \
+  -H 'sec-ch-ua: "Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Windows"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-site' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36'
+  
+
+###
+GET https://api.hellspy.to/gw/video/18506365/1a6b35c6847211a8
+accept: */*
